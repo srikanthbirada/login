@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def login(request):
+	error = []
 	if request.method=='POST':
 		form = LoginForm(request.POST)
 		if form.is_valid():
@@ -17,9 +18,9 @@ def login(request):
 				if username == u.username and password == u.password:
 					return HttpResponseRedirect('/home')
 			else:
-				return HttpResponseRedirect('/login')
+				error.append('username not found or username password not matched')
 		else:
-			return render_to_response('login.html',{'form':form},RequestContext(request))
+			error.append('incomplete form')
 	else:
 		form=LoginForm()
-		return render_to_response('login.html',{'form':form},RequestContext(request))
+	return render_to_response('login.html',{'form':form,'error':error},RequestContext(request))

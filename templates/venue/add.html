@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body %}
+	<form action = "/home/" method = 'POST'>
+	{% csrf_token %}
+	{{ v.as_table }}<br>
+	<h3>Owner</h3>
+	{{o.as_table }}
+<input type = "submit" value = "add">
+</form>
+{% endblock %}

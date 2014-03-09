@@ -2,6 +2,16 @@
 {% block title %}
 	Home page
 {% endblock %}
+{% block style %}
+body {
+	background-color:#5d9ab2;
+} 
+{% endblock %}
 {% block body %}
-This is home page
+<p id="form-head" style="color:ffffff ;margin-left:6%;font-size:40px;margin-top:-5%;">
+       Here's the list of currently available venues <br/>
+</p>
+<a href="/venue/add/"><input type="button" value ="Add a venue"></a>
+<a href="/venue/list/"><input type="button" value="ViewList"></a></br>
+<a href = "/logout/"><input type="button" value = "logout" ></a>
 {% endblock %}

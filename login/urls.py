@@ -13,4 +13,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^venuemonk/list/','venuemonk.views.list',name='list'),
     url(r'^venuemonk/add/','venuemonk.views.add_venue',name='add_venue'),
+    url(r'^venuemonk/delete/','venuemonk.views.delete_venue',name='delete_venue'),
 )

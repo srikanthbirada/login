@@ -37,7 +37,7 @@ def add_venue(request):
                                 if is_valid_venueform:
                                 	v = venue_form.save(commit=False)
                                         v.save()
-                                        return HttpResponse("added")
+                                        return render_to_response('Venue/addsuccesful.html')
                                 else:
                                		return render_to_response('Venue/addVenue.html',{'Venue':venue_form},RequestContext(request))
 			else:
@@ -48,3 +48,29 @@ def add_venue(request):
 	except KeyError:
 		return error403(request)
 
+def delete_venue(request):
+	try:
+		logged_inside = request.session['Loggedinside']
+		if logged_inside:
+			if request.method == 'POST':
+				request.session.set_test_cookie()
+				if request.session.test_cookie_worked():
+					request.session.delete_test_cookie()
+				else:
+					return HttpResponse("Please enable cookies and try again")
+				venue_form = deletevenueForm(request.POST)
+				is_valid_venue_form = venue_form.is_valid()
+				if is_valid_venue_form:
+					venue_name = request.POST['name']
+					venue_tuple = VenueList.objects.all().filter(name = venue_name)
+					venue_tuple.delete()
+					return render_to_response('Venue/deletesuccesful.html')
+				else:
+					return render_to_response('Venue/deleteVenue.html',{'Venue':venue_form},RequestContext(request))
+			else:
+				venue_form = deletevenueForm()
+				return render_to_response('Venue/deleteVenue.html',{'Venue':venue_form},RequestContext(request))
+		else:
+			return error403(request)				
+	except KeyError:
+		return error403(request)

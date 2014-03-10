@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block body %}
+<form action = "" method = 'POST'>
+{% csrf_token %}
+        <h3> Venue details <h3>
+        {{ Venue.as_table }}
+<input type = 'submit' value = 'add'>
+</form>
+{% endblock %}

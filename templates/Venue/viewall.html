@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block style %}
+body {
+	background-color:#5d9ab2;
+}
+#venues
+{
+font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+width:100%;
+border-collapse:collapse;
+}
+#venues td, #venues th 
+{
+font-size:1em;
+border:1px solid #00000;
+padding:3px 7px 2px 7px;
+}
+#venues th 
+{
+font-size:1.1em;
+text-align:left;
+padding-top:5px;
+padding-bottom:4px;
+background-color:#d0f0f6;
+color:#000000;
+}
+#venues tr.alt td 
+{
+color:#000000;
+background-color:#EAF2D3;
+}
+{% endblock %}
+
+{% block body %}
+	<a href="/home/"><input type="button" value="back to home"/></a></br>
+	
+	<table id="venues">
+		<th>venue name</th>
+		<th>venue address</th>
+		{% for v in Venuelist %}
+			<tr>
+				<td> {{v.name}}</td>
+				<td> {{v.address}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
